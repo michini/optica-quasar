@@ -1,19 +1,65 @@
 <template>
-  <q-page>
-    <!-- Banner principal con el logo de óptica -->
-    <div class="banner q-py-xl flex flex-center">
-      <div class="banner-graphic q-mx-auto"></div>
-    </div>
+  <!-- Banner principal con el logo de óptica -->
+  <div class="">
+    <q-carousel swipeable animated v-model="slide" :autoplay="autoplay" ref="carousel" infinite>
+      <q-carousel-slide name="first" img-src="https://cdn.quasar.dev/img/mountains.jpg">
+        <div class="absolute-bottom custom-caption">
+          <div class="text-h2">First stop</div>
+          <div class="text-subtitle1">Mountains</div>
+        </div>
+      </q-carousel-slide>
+      <q-carousel-slide name="2" img-src="https://cdn.quasar.dev/img/parallax1.jpg">
+        <div class="absolute-bottom custom-caption">
+          <div class="text-h2">Second stop</div>
+          <div class="text-subtitle1">Famous City</div>
+        </div>
+      </q-carousel-slide>
+      <q-carousel-slide name="3" img-src="https://cdn.quasar.dev/img/parallax2.jpg">
+        <div class="absolute-bottom custom-caption">
+          <div class="text-h2">Third stop</div>
+          <div class="text-subtitle1">Famous Bridge</div>
+        </div>
+      </q-carousel-slide>
+      <q-carousel-slide name="4" img-src="https://cdn.quasar.dev/img/quasar.jpg">
+        <div class="absolute-bottom custom-caption">
+          <div class="text-h2">Fourth stop</div>
+          <div class="text-subtitle1">Quasar Framework</div>
+        </div>
+      </q-carousel-slide>
 
-    <!-- Sección de Servicios -->
-    <ServicesSection />
+      <template v-slot:control>
+        <q-carousel-control position="bottom-right" :offset="[18, 18]" class="q-gutter-xs">
+          <q-btn
+            push
+            round
+            dense
+            color="orange"
+            text-color="black"
+            icon="arrow_left"
+            @click="$refs.carousel.previous()"
+          />
+          <q-btn
+            push
+            round
+            dense
+            color="orange"
+            text-color="black"
+            icon="arrow_right"
+            @click="$refs.carousel.next()"
+          />
+        </q-carousel-control>
+      </template>
+    </q-carousel>
+  </div>
 
-    <!-- Sección Nosotros -->
-    <AboutSection />
+  <!-- Sección de Servicios -->
+  <ServicesSection />
 
-    <!-- Sección de Contacto -->
-    <ContactSection />
-  </q-page>
+  <!-- Sección Nosotros -->
+  <AboutSection />
+
+  <!-- Sección de Contacto -->
+  <ContactSection />
 </template>
 
 <script>
@@ -21,6 +67,7 @@ import { defineComponent } from 'vue'
 import ServicesSection from 'components/singlePage/ServicesSection.vue'
 import AboutSection from 'components/singlePage/AboutSection.vue'
 import ContactSection from 'components/singlePage/ContactSection.vue'
+import { ref } from 'vue'
 
 export default defineComponent({
   name: 'IndexPage',
@@ -29,36 +76,20 @@ export default defineComponent({
     AboutSection,
     ContactSection,
   },
+  setup() {
+    return {
+      slide: ref('first'),
+      autoplay: ref(true),
+    }
+  },
 })
 </script>
 
-<style scoped>
-.banner {
-  min-height: 250px;
-  background-color: white;
-}
-
-.banner-graphic {
-  width: 400px;
-  height: 180px;
-  position: relative;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.banner-graphic:before,
-.banner-graphic:after {
-  content: '';
-  position: absolute;
-  width: 100%;
-  height: 100%;
-  background-repeat: no-repeat;
-  background-position: center;
-  background-size: contain;
-}
-
-.banner-graphic:before {
-  background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 300"><path d="M120,150 L200,50 L400,50 L480,150 L400,250 L200,250 Z" fill="none" stroke="black" stroke-width="3"/></svg>');
+<style lang="scss" scoped>
+.custom-caption {
+  text-align: center;
+  padding: 12px;
+  color: white;
+  background-color: rgba(0, 0, 0, 0.3);
 }
 </style>

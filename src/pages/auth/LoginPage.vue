@@ -4,6 +4,7 @@
       <q-card-section class="text-center">
         <h4 class="text-weight-bold q-my-none">Iniciar Sesión</h4>
         <p class="text-grey-7">Bienvenido, ingresa a tu cuenta</p>
+        <img alt="Quasar logo" src="~assets/logo_optica.jpg" style="width: 200px; height: 200px" />
       </q-card-section>
 
       <q-card-section>

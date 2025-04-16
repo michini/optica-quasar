@@ -36,7 +36,7 @@
                   </div>
                   <div class="col-12 col-md-5">
                     <q-card flat class="q-pa-sm">
-                      <q-video src="https://www.youtube.com/embed/dQw4w9WgXcQ" :ratio="16 / 9" />
+                      <q-video src="" :ratio="16 / 9" />
                       <div class="row q-mt-sm">
                         <q-btn icon="play_arrow" flat round />
                         <q-slider v-model="videoPosition" :min="0" :max="100" class="col q-mx-sm" />

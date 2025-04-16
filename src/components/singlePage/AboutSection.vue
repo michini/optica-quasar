@@ -24,52 +24,28 @@
         <div class="row q-col-gutter-xl">
           <!-- Misión -->
           <div class="col-12 col-md-6">
-            <h3 class="text-h5">Misión</h3>
-            <div v-for="(item, index) in misionItems" :key="'mision-' + index">
-              <p class="text-body1">
-                <span class="text-weight-bold">{{ item.title }}</span>
-                <span v-if="item.link">
-                  con un <a :href="item.link" class="text-primary">{{ item.linkText }}</a
-                  >.</span
-                >
-              </p>
-              <p v-if="item.secondRow" class="text-body1">
-                <span>{{ item.secondRow }}</span>
-                <span v-if="item.secondLink">
-                  con un
-                  <a :href="item.secondLink" class="text-primary">{{ item.secondLinkText }}</a
-                  >.</span
-                >
-              </p>
-              <p v-if="item.hasIcon" class="flex items-center q-mb-sm">
-                <q-icon name="info" size="xs" class="q-mr-xs" /><span>inline with text.</span>
-              </p>
-            </div>
+            <h3 class="text-h3 flex flex-center">Misión</h3>
+            <p class="text-body1 text-justify">
+              Lorem ipsum dolor sit amet consectetur adipisicing elit. Omnis aspernatur consectetur
+              ipsam? Voluptates maiores cumque, animi libero exercitationem quisquam blanditiis,
+              officia odit, ea labore reiciendis provident numquam ratione esse ab! Lorem ipsum
+              dolor sit amet consectetur adipisicing elit. Omnis aspernatur consectetur ipsam?
+              Voluptates maiores cumque, animi libero exercitationem quisquam blanditiis, officia
+              odit, ea labore reiciendis provident numquam ratione esse ab!
+            </p>
           </div>
 
           <!-- Visión -->
           <div class="col-12 col-md-6">
-            <h3 class="text-h5">Visión</h3>
-            <div v-for="(item, index) in visionItems" :key="'vision-' + index">
-              <p class="text-body1">
-                <span class="text-weight-bold">{{ item.title }}</span>
-                <span v-if="item.link">
-                  con un <a :href="item.link" class="text-primary">{{ item.linkText }}</a
-                  >.</span
-                >
-              </p>
-              <p v-if="item.secondRow" class="text-body1">
-                <span>{{ item.secondRow }}</span>
-                <span v-if="item.secondLink">
-                  con un
-                  <a :href="item.secondLink" class="text-primary">{{ item.secondLinkText }}</a
-                  >.</span
-                >
-              </p>
-              <p v-if="item.hasIcon" class="flex items-center q-mb-sm">
-                <q-icon name="info" size="xs" class="q-mr-xs" /><span>inline with text.</span>
-              </p>
-            </div>
+            <h3 class="text-h3 flex flex-center">Visión</h3>
+            <p class="text-body1 text-justify">
+              Lorem ipsum dolor sit amet consectetur adipisicing elit. Omnis aspernatur consectetur
+              ipsam? Voluptates maiores cumque, animi libero exercitationem quisquam blanditiis,
+              officia odit, ea labore reiciendis provident numquam ratione esse ab! Lorem ipsum
+              dolor sit amet consectetur adipisicing elit. Omnis aspernatur consectetur ipsam?
+              Voluptates maiores cumque, animi libero exercitationem quisquam blanditiis, officia
+              odit, ea labore reiciendis provident numquam ratione esse ab!
+            </p>
           </div>
         </div>
       </div>
@@ -83,7 +59,11 @@ import { defineComponent } from 'vue'
 export default defineComponent({
   name: 'AboutSection',
   setup() {
-    const doctors = [{ title: 'Oftalmóloga' }, { title: 'Oftalmóloga' }, { title: 'Oftalmóloga' }]
+    const doctors = [
+      { title: 'Oftalmóloga 1' },
+      { title: 'Oftalmóloga 2' },
+      { title: 'Oftalmóloga 3' },
+    ]
 
     const misionItems = [
       {
