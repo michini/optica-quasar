@@ -29,7 +29,7 @@
       </q-toolbar>
     </q-header>
 
-    <q-drawer v-model="leftDrawerOpen" bordered class="bg-grey-1">
+    <q-drawer v-model="leftDrawerOpen" bordered>
       <q-list>
         <q-img src="~assets/logo_optica.jpg" alt="Logo" class="q-mb-md" height="160px">
           <template v-slot:caption>

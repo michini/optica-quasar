@@ -52,12 +52,20 @@ const routes = [
     path: '/ajustes',
     name: 'ajustes',
     component: () => import('src/layouts/home/HomeLayout.vue'),
-    // children: [
-    //   {
-    //     path: '',
-    //     component: () => import('src/pages/home/inventario/IndexPage.vue'),
-    //   },
-    // ],
+    children: [
+      {
+        path: '',
+        name: 'ajustes.index',
+        meta: { title: 'Ajustes Page' },
+        component: () => import('src/pages/home/ajustes/IndexPage.vue'),
+      },
+      {
+        path: '/ajustes/tipo-producto',
+        name: 'ajustes.tipo-producto',
+        meta: { title: 'Tipo producto' },
+        component: () => import('src/pages/home/ajustes/sections/AjustesTipoProductoPage.vue'),
+      },
+    ],
     meta: { requiresAuth: true },
   },
 

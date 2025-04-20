@@ -56,7 +56,7 @@ export default defineComponent({
       {
         icon: 'qr_code',
         label: 'Ajustes',
-        route: '/profile',
+        route: '/ajustes',
       },
       {
         icon: 'person',
