@@ -1,7 +1,7 @@
 import { defineStore, acceptHMRUpdate } from 'pinia'
 import { api } from 'src/boot/axios'
 
-export const useAjustesStore = defineStore('ajustesStore', {
+export const useTipoProductoStore = defineStore('tipoProductosStore', {
   state: () => ({}),
   getters: {},
   actions: {
@@ -53,5 +53,5 @@ export const useAjustesStore = defineStore('ajustesStore', {
 })
 
 if (import.meta.hot) {
-  import.meta.hot.accept(acceptHMRUpdate(useAjustesStore, import.meta.hot))
+  import.meta.hot.accept(acceptHMRUpdate(useTipoProductoStore, import.meta.hot))
 }

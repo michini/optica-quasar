@@ -101,11 +101,11 @@
 
 <script>
 import { ref } from 'vue'
-import { useAjustesStore } from 'src/stores/useAjustesStore'
+import { useTipoProductoStore } from 'src/stores/useTipoProductoStore'
 import { Notify, Dialog } from 'quasar'
 
 const prompt = ref(false)
-const AjustesStore = useAjustesStore()
+const AjustesStore = useTipoProductoStore()
 const allproducts = AjustesStore.getAll()
 const rows = ref([])
 const tipoProducto = ref({
