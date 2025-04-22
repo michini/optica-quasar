@@ -1,26 +1,24 @@
 import { defineStore, acceptHMRUpdate } from 'pinia'
 import { api } from 'src/boot/axios'
 
-export const useTipoProductoStore = defineStore('tipoProductosStore', {
+export const useMarcaStore = defineStore('marcaStore', {
   state: () => ({
-    tipoProductos: [],
-    loading: false,
-    error: null,
+    marcas: [],
   }),
   getters: {},
   actions: {
     async getAll() {
       try {
-        const response = await api.get('/tipo-producto', {
+        const response = await api.get('marca', {
           headers: { Authorization: `Bearer ${localStorage.getItem('token')}` },
         })
-        this.tipoProductos = response.data.map((tipoProducto) => ({
-          id: tipoProducto.id,
-          nombre: tipoProducto.nombre,
-          created_at: tipoProducto.created_at,
-          updated_at: tipoProducto.updated_at,
+        this.marcas = response.data.map((marca) => ({
+          id: marca.id,
+          nombre: marca.nombre,
+          tipo_producto_id: marca.tipo_producto_id,
+          created_at: marca.created_at,
+          updated_at: marca.updated_at,
         }))
-
         return response.data
       } catch (error) {
         console.error('Error fetching ajustes:', error)
@@ -29,11 +27,9 @@ export const useTipoProductoStore = defineStore('tipoProductosStore', {
     },
     async create(data) {
       try {
-        const response = await api.post('tipo-producto', data, {
+        const response = await api.post('marca', data, {
           headers: { Authorization: `Bearer ${localStorage.getItem('token')}` },
         })
-        this.tipoProductos.push(response.data.tipo_producto)
-        //console.log('Ajuste creado:', this.tipoProductos)
         return response.data
       } catch (error) {
         console.error('Error creating ajuste:', error)
@@ -42,7 +38,7 @@ export const useTipoProductoStore = defineStore('tipoProductosStore', {
     },
     async update(data, id) {
       try {
-        const response = await api.put(`tipo-producto/${id}`, data, {
+        const response = await api.put(`marca/${id}`, data, {
           headers: { Authorization: `Bearer ${localStorage.getItem('token')}` },
         })
         return response.data
@@ -53,11 +49,9 @@ export const useTipoProductoStore = defineStore('tipoProductosStore', {
     },
     async delete(id) {
       try {
-        const response = await api.delete(`tipo-producto/${id}`, {
+        const response = await api.delete(`marca/${id}`, {
           headers: { Authorization: `Bearer ${localStorage.getItem('token')}` },
         })
-        this.tipoProductos = this.tipoProductos.filter((tipoProducto) => tipoProducto.id !== id)
-        //console.log('Ajuste eliminado:', this.tipoProductos)
         return response.data
       } catch (error) {
         console.error(`Error deleting ajuste with id ${id}:`, error)
@@ -68,5 +62,5 @@ export const useTipoProductoStore = defineStore('tipoProductosStore', {
 })
 
 if (import.meta.hot) {
-  import.meta.hot.accept(acceptHMRUpdate(useTipoProductoStore, import.meta.hot))
+  import.meta.hot.accept(acceptHMRUpdate(useMarcaStore, import.meta.hot))
 }

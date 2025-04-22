@@ -3,7 +3,7 @@
     <div class="q-gutter-y-md" style="max-width: 100%">
       <q-card>
         <q-tabs v-model="tab" class="bg-blue-7 text-white" align="justify" narrow-indicator>
-          <q-tab name="barcode" label="Codigos de barra" />
+          <q-tab name="barcode" label="Pre carga de productos" />
           <q-tab name="product" label="Tipo de producto" exact replace />
           <q-tab name="brand" label="Marcas" />
           <q-tab name="category" label="Categoria" />
@@ -22,27 +22,12 @@
             ><ajustes-tipo-producto-page></ajustes-tipo-producto-page
           ></q-tab-panel>
 
-          <q-tab-panel name="brand" class="">
-            <div class="row">
-              <div
-                class="col-lg-6 offset-lg-3 col-md-8 offset-md-2 col-sm-10 offset-sm-1 col-xs-12"
-              >
-                <q-card class="">
-                  <q-card-section>
-                    <div class="text-h6">Nueva marca</div>
-                    <q-input filled v-model="productType" label="Tipo de producto" />
-                  </q-card-section>
-
-                  <q-card-actions>
-                    <q-btn label="Guardar" color="primary" />
-                  </q-card-actions>
-                </q-card>
-              </div>
-            </div>
+          <q-tab-panel name="brand">
+            <ajustes-marca-page></ajustes-marca-page>
           </q-tab-panel>
-          <q-tab-panel name="category" class="bg-lime-1 text-dark">
-            <div class="text-h6">Categorias</div>
-            Lorem ipsum dolor sit amet consectetur adipisicing elit.
+
+          <q-tab-panel name="category">
+            <ajustes-categoria-page></ajustes-categoria-page>
           </q-tab-panel>
         </q-tab-panels>
       </q-card>
@@ -53,14 +38,18 @@
 <script>
 import { ref } from 'vue'
 import AjustesTipoProductoPage from 'src/pages/home/ajustes/sections/AjustesTipoProductoPage.vue'
+import AjustesMarcaPage from 'src/pages/home/ajustes/sections/AjustesMarcaPage.vue'
+import AjustesCategoriaPage from 'src/pages/home/ajustes/sections/AjustesCategoriaPage.vue'
 
 export default {
   components: {
     AjustesTipoProductoPage,
+    AjustesMarcaPage,
+    AjustesCategoriaPage,
   },
   setup() {
     return {
-      tab: ref('product'),
+      tab: ref('category'),
       filter: ref(''),
     }
   },
