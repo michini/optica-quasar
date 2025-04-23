@@ -1,29 +1,37 @@
 <template>
   <!-- Banner principal con el logo de óptica -->
   <div class="">
-    <q-carousel swipeable animated v-model="slide" :autoplay="autoplay" ref="carousel" infinite>
-      <q-carousel-slide name="first" img-src="https://cdn.quasar.dev/img/mountains.jpg">
+    <q-carousel
+      swipeable
+      animated
+      v-model="slide"
+      :autoplay="autoplay"
+      ref="carousel"
+      infinite
+      height="500px"
+    >
+      <q-carousel-slide
+        name="first"
+        img-src="https://leoptica.com/cdn/shop/files/baner-leoptica-hombre-mujer-1.jpg?v=1730334294&width=2000"
+      >
         <div class="absolute-bottom custom-caption">
-          <div class="text-h2">First stop</div>
-          <div class="text-subtitle1">Mountains</div>
+          <div class="text-h2">Lúcete a tu estilo</div>
         </div>
       </q-carousel-slide>
-      <q-carousel-slide name="2" img-src="https://cdn.quasar.dev/img/parallax1.jpg">
+      <q-carousel-slide
+        name="2"
+        img-src="https://leoptica.com/cdn/shop/files/baner-leoptica-mujer-mama-1.jpg?v=1714324798&width=2000"
+      >
         <div class="absolute-bottom custom-caption">
-          <div class="text-h2">Second stop</div>
-          <div class="text-subtitle1">Famous City</div>
+          <div class="text-h2">Atención profesional</div>
         </div>
       </q-carousel-slide>
-      <q-carousel-slide name="3" img-src="https://cdn.quasar.dev/img/parallax2.jpg">
+      <q-carousel-slide
+        name="3"
+        img-src="https://leoptica.com/cdn/shop/files/banner-clip-solar.jpg?v=1733182568&width=2000"
+      >
         <div class="absolute-bottom custom-caption">
-          <div class="text-h2">Third stop</div>
-          <div class="text-subtitle1">Famous Bridge</div>
-        </div>
-      </q-carousel-slide>
-      <q-carousel-slide name="4" img-src="https://cdn.quasar.dev/img/quasar.jpg">
-        <div class="absolute-bottom custom-caption">
-          <div class="text-h2">Fourth stop</div>
-          <div class="text-subtitle1">Quasar Framework</div>
+          <div class="text-h2">Monturas de calidad</div>
         </div>
       </q-carousel-slide>
 
