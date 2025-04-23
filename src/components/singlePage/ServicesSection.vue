@@ -1,7 +1,7 @@
 <template>
   <section id="servicios" class="q-py-lg">
     <div class="text-center q-mb-lg">
-      <h2 class="text-h3">Servicios</h2>
+      <h2 class="text-h3">Servicios y productos</h2>
     </div>
 
     <div class="row justify-center q-px-md">

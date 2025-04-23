@@ -45,6 +45,12 @@ export const useTipoProductoStore = defineStore('tipoProductosStore', {
         const response = await api.put(`tipo-producto/${id}`, data, {
           headers: { Authorization: `Bearer ${localStorage.getItem('token')}` },
         })
+        this.tipoProductos = this.tipoProductos.map((tipoProducto) => {
+          if (tipoProducto.id === id) {
+            return { ...tipoProducto, ...data }
+          }
+          return tipoProducto
+        })
         return response.data
       } catch (error) {
         console.error(`Error updating ajuste with id ${id}:`, error)

@@ -9,13 +9,8 @@
             width="220px"
             class="q-mb-md"
             no-spinner
+            style="border-radius: 50%; box-shadow: 0 0 10px rgba(0, 0, 0, 0.2)"
           >
-            <template v-slot:error>
-              <div class="econopticas-logo">
-                <span class="text-red text-h4 text-weight-bold">Econópticas</span>
-                <span class="text-caption text-red">(ve bien por menos)</span>
-              </div>
-            </template>
           </q-img>
         </div>
 
@@ -40,7 +35,7 @@
           <p class="text-h6 text-weight-bold q-mb-sm">NOSOTROS</p>
           <q-list dense padding class="q-mt-sm">
             <q-item clickable v-ripple to="/acerca-de" class="text-grey-8">
-              <q-item-section>Acerca de Econópticas</q-item-section>
+              <q-item-section>Acerca de Opticas Pa'ti</q-item-section>
             </q-item>
             <q-item clickable v-ripple to="/politicas-privacidad" class="text-grey-8">
               <q-item-section>Políticas de privacidad</q-item-section>

@@ -2,7 +2,7 @@
   <q-toolbar class="q-px-lg">
     <!-- Logo -->
     <q-btn flat round no-wrap to="/" v-ripple="false" size="lg">
-      <img src="~assets/logo_optica.jpg" alt="" height="51px" style="" />
+      <img src="~assets/logo_optica.jpg" alt="" height="51px" style="border-radius: 50%" />
     </q-btn>
     <!-- <q-avatar size="md" class="q-mr-sm">
       <img src="~assets/logo_optica.jpg" alt="" />

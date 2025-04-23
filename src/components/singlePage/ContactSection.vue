@@ -1,5 +1,5 @@
 <template>
-  <section id="contacto" class="q-py-xl">
+  <section id="contacto" class="q-pt-auto q-pb-xl">
     <div class="text-center q-mb-lg">
       <h2 class="text-h3">Contacto</h2>
     </div>
@@ -34,7 +34,7 @@
                 </div>
                 <div class="col-10">
                   <div class="text-subtitle1 text-weight-bold">Ubicanos</div>
-                  <div>Jiron xxx/78 - Huancayo</div>
+                  <div>Jr. Arequipa 521, Huancayo 12001 - Huancayo</div>
                 </div>
               </div>
             </div>
@@ -52,8 +52,12 @@
                 </div>
                 <div class="col-10">
                   <div class="text-subtitle1 text-weight-bold">Teléfono</div>
-                  <div>999999999</div>
-                  <div>776453234</div>
+                  <div>
+                    <a href="https://wa.me/998547145" style="color: white" target="_blank"
+                      >998547145</a
+                    >
+                  </div>
+                  <div>064-748456</div>
                 </div>
               </div>
             </div>
@@ -66,7 +70,7 @@
                 </div>
                 <div class="col-10">
                   <div class="text-subtitle1 text-weight-bold">Correo</div>
-                  <div>aaa@gmail.com</div>
+                  <div>opticas.pati@gmail.com</div>
                 </div>
               </div>
             </div>
