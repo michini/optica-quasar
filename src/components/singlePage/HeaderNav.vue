@@ -2,7 +2,7 @@
   <q-toolbar class="q-px-lg">
     <!-- Logo -->
     <q-btn flat round no-wrap to="/" v-ripple="false" size="lg">
-      <img src="~assets/logo_optica.jpg" alt="" height="51px" style="border-radius: 50%" />
+      <img src="~assets/logo_optica.jpg" alt="" height="75px" style="border-radius: 50%" />
     </q-btn>
     <q-toolbar-title class="q-mx-md q-my-none">
       <span class="text-h5 text-weight-bold" style="color: #e91e63">Ópticas Pa'ti</span>
@@ -19,7 +19,7 @@
           <q-btn flat no-caps label="Inicio" to="/" />
           <q-btn flat no-caps label="Servicios" href="#servicios" />
           <q-btn flat no-caps label="Nosotros" href="#nosotros" />
-          <q-btn flat no-caps label="Contacto" href="#contacto" />
+          <q-btn flat no-caps label="Contacto" href="#contacto" ></q-btn>
           <q-btn
             flat
             no-caps

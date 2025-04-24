@@ -17,7 +17,7 @@
                   clickable
                   :active="selectedTab === index"
                   @click="selectedTab = index"
-                  active-class=""
+                  active-class="text-pink-5"
                 >
                   <q-item-section>{{ tab.label }}</q-item-section>
                 </q-item>

@@ -20,13 +20,13 @@
     </div>
 
     <!-- Misión y Visión -->
-    <div class="row justify-center q-px-md" style="background-color: #f9f9f9">
+    <div class="row justify-center q-px-md bg-white" >
       <div class="col-xs-12 col-md-10 col-lg-8">
         <div class="row q-col-gutter-xl">
           <!-- Misión -->
           <div class="col-12 col-md-6">
-            <h3 class="text-h3 flex flex-center" style="color: #000000">Misión</h3>
-            <p class="text-body1" style="color: #000000">
+            <h3 class="text-h3 flex flex-center text-black" >Misión</h3>
+            <p class="text-body1 text-black">
               Nuestra misión es proporcionar servicios de salud visual de alta calidad, utilizando
               tecnología de vanguardia y un equipo de profesionales altamente capacitados,
               comprometidos con el bienestar y la satisfacción de nuestros pacientes. Nos esforzamos
@@ -40,8 +40,8 @@
 
           <!-- Visión -->
           <div class="col-12 col-md-6">
-            <h3 class="text-h3 flex flex-center" style="color: #000000">Visión</h3>
-            <p class="text-body1" style="color: #000000">
+            <h3 class="text-h3 flex flex-center text-black">Visión</h3>
+            <p class="text-body1 text-black">
               Nuestra visión es ser líderes en el cuidado de la salud visual, reconocidos por
               nuestra excelencia en servicios, innovación tecnológica y compromiso con la comunidad.
               Aspiramos a establecer estándares de calidad y atención que inspiren confianza y
