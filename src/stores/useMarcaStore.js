@@ -41,6 +41,12 @@ export const useMarcaStore = defineStore('marcaStore', {
         const response = await api.put(`marca/${id}`, data, {
           headers: { Authorization: `Bearer ${localStorage.getItem('token')}` },
         })
+        this.marcas = this.marcas.map((marca) => {
+          if (marca.id === id) {
+            return { ...marca, ...data }
+          }
+          return marca
+        })
         return response.data
       } catch (error) {
         console.error(`Error updating ajuste with id ${id}:`, error)
