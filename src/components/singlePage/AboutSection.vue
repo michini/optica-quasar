@@ -1,7 +1,7 @@
 <template>
   <section id="nosotros" class="q-py-lg">
     <div class="text-center q-mb-lg">
-      <h2 class="text-h3">Nosotros</h2>
+      <h2 class="text-h3">Nuestros profesionales</h2>
     </div>
 
     <!-- Equipo de oftalmólogos -->
@@ -32,8 +32,7 @@
               comprometidos con el bienestar y la satisfacción de nuestros pacientes. Nos esforzamos
               por mejorar la calidad de vida de las personas a través de soluciones ópticas
               personalizadas y accesibles. Además, buscamos fomentar la educación y la prevención en
-              el cuidado de la salud visual, promoviendo hábitos saludables y concienciando a la
-              comunidad sobre la importancia de una visión óptima para el desarrollo integral y el
+              el cuidado de la salud visual, promoviendo hábitos saludables y el
               bienestar general.
             </p>
           </div>
@@ -65,73 +64,21 @@ export default defineComponent({
   setup() {
     const doctors = [
       {
-        title: 'Dra. Alinda Yépez Espejo',
+        title: 'Dra. Alinda Yépez',
         img: 'https://www.oftalmologiaespecializada.pe/images/oftalmologos/01.jpg',
       },
       {
-        title: 'Dr. Hugo Elias Jiménez Herrera',
+        title: 'Dr. Hugo Jiménez',
         img: 'https://www.oftalmologiaespecializada.pe/images/oftalmologos/05.jpg',
       },
       {
-        title: 'Dra. Rosana Marcano Mundarain',
+        title: 'Dra. Rosana Marcano',
         img: 'https://www.oftalmologiaespecializada.pe/images/oftalmologos/03.jpg',
       },
     ]
 
-    const misionItems = [
-      {
-        title: 'A paragraph of text',
-        link: '#',
-        linkText: 'unassigned link',
-      },
-      {
-        secondRow: 'A second row of text',
-        secondLink: '#',
-        secondLinkText: 'web link',
-      },
-      { hasIcon: true },
-      {
-        title: 'A paragraph of text',
-        link: '#',
-        linkText: 'unassigned link',
-      },
-      {
-        secondRow: 'A second row of text',
-        secondLink: '#',
-        secondLinkText: 'web link',
-      },
-      { hasIcon: true },
-    ]
-
-    const visionItems = [
-      {
-        title: 'A paragraph of text',
-        link: '#',
-        linkText: 'unassigned link',
-      },
-      {
-        secondRow: 'A second row of text',
-        secondLink: '#',
-        secondLinkText: 'web link',
-      },
-      { hasIcon: true },
-      {
-        title: 'A paragraph of text',
-        link: '#',
-        linkText: 'unassigned link',
-      },
-      {
-        secondRow: 'A second row of text',
-        secondLink: '#',
-        secondLinkText: 'web link',
-      },
-      { hasIcon: true },
-    ]
-
     return {
       doctors,
-      misionItems,
-      visionItems,
     }
   },
 })
