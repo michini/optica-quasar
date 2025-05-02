@@ -1,9 +1,9 @@
 import { defineStore, acceptHMRUpdate } from 'pinia'
 import { api } from 'src/boot/axios'
 
-export const useTipoProductoStore = defineStore('tipoProductosStore', {
+export const usePreCargaStore = defineStore('preCargaStore', {
   state: () => ({
-    tipoProductos: [],
+    preCargas: [],
     loading: false,
     error: null,
   }),
@@ -11,29 +11,39 @@ export const useTipoProductoStore = defineStore('tipoProductosStore', {
   actions: {
     async getAll() {
       try {
-        const response = await api.get('/tipo-producto', {
+        const response = await api.get('pre-carga', {
           headers: { Authorization: `Bearer ${localStorage.getItem('token')}` },
         })
-        this.tipoProductos = response.data.map((tipoProducto) => ({
-          id: tipoProducto.id,
-          nombre: tipoProducto.nombre,
-          created_at: tipoProducto.created_at,
-          updated_at: tipoProducto.updated_at,
+        this.preCargas = response.data.map((preCarga) => ({
+          id: preCarga.id,
+          cantidad: preCarga.cantidad,
+          precio: preCarga.precion,
+          color: preCarga.color,
+          material: preCarga.material,
+          descripcion: preCarga.descripcion,
+          imagen: preCarga.imagen,
+          barcode: preCarga.barcode,
+          tipo_producto: preCarga.tipo_producto,
+          marca: preCarga.marca,
+          categoria: preCarga.categoria,
+          created_at: preCarga.created_at,
+          updated_at: preCarga.updated_at,
         }))
 
         return response.data
       } catch (error) {
-        console.error('Error fetching ajustes:', error)
+        console.error('Error fetching preCargas:', error)
         throw error
       }
     },
     async create(data) {
       try {
-        const response = await api.post('tipo-producto', data, {
-          headers: { Authorization: `Bearer ${localStorage.getItem('token')}` },
+        const response = await api.post('pre-carga', data, {
+          headers: {
+            Authorization: `Bearer ${localStorage.getItem('token')}`,
+          },
         })
-        this.tipoProductos.push(response.data.tipo_producto)
-        //console.log('Ajuste creado:', this.tipoProductos)
+        this.preCargas.push(response.data.preCarga)
         return response.data
       } catch (error) {
         console.error('Error creating ajuste:', error)
@@ -42,12 +52,9 @@ export const useTipoProductoStore = defineStore('tipoProductosStore', {
     },
     async update(data, id) {
       try {
-        const response = await api.put(`tipo-producto/${id}`, data, {
+        const response = await api.put(`pre-carga/${id}`, data, {
           headers: { Authorization: `Bearer ${localStorage.getItem('token')}` },
         })
-        this.tipoProductos = this.tipoProductos.map((tipoProducto) =>
-          tipoProducto.id === id ? { ...tipoProducto, ...data } : tipoProducto,
-        )
         return response.data
       } catch (error) {
         console.error(`Error updating ajuste with id ${id}:`, error)
@@ -56,10 +63,10 @@ export const useTipoProductoStore = defineStore('tipoProductosStore', {
     },
     async delete(id) {
       try {
-        const response = await api.delete(`tipo-producto/${id}`, {
+        const response = await api.delete(`pre-carga/${id}`, {
           headers: { Authorization: `Bearer ${localStorage.getItem('token')}` },
         })
-        this.tipoProductos = this.tipoProductos.filter((tipoProducto) => tipoProducto.id !== id)
+        this.preCargas = this.preCargas.filter((preCarga) => preCarga.id !== id)
         //console.log('Ajuste eliminado:', this.tipoProductos)
         return response.data
       } catch (error) {
@@ -71,5 +78,5 @@ export const useTipoProductoStore = defineStore('tipoProductosStore', {
 })
 
 if (import.meta.hot) {
-  import.meta.hot.accept(acceptHMRUpdate(useTipoProductoStore, import.meta.hot))
+  import.meta.hot.accept(acceptHMRUpdate(usePreCargaStore, import.meta.hot))
 }

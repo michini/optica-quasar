@@ -3,7 +3,7 @@
     <div class="q-gutter-y-md" style="max-width: 100%">
       <q-card>
         <q-tabs v-model="tab" class="bg-blue-7 text-white" align="justify" narrow-indicator>
-          <q-tab name="barcode" label="Pre carga de productos" />
+          <q-tab name="preload" label="Pre carga de productos" />
           <q-tab name="product" label="Tipo de producto" exact replace />
           <q-tab name="brand" label="Marcas" />
           <q-tab name="category" label="Categoria" />
@@ -11,11 +11,9 @@
 
         <q-separator />
 
-        <q-tab-panels v-model="tab" animated class="text-dark text-center">
-          <q-tab-panel name="barcode">
-            <div class="text-h6">codigos de barr</div>
-            solicitar: <br />
-            cantida, precio, color,material,
+        <q-tab-panels v-model="tab" animated class="text-center">
+          <q-tab-panel name="preload">
+            <ajustes-pre-carga-page></ajustes-pre-carga-page>
           </q-tab-panel>
 
           <q-tab-panel name="product"
@@ -40,16 +38,18 @@ import { ref } from 'vue'
 import AjustesTipoProductoPage from 'src/pages/home/ajustes/sections/AjustesTipoProductoPage.vue'
 import AjustesMarcaPage from 'src/pages/home/ajustes/sections/AjustesMarcaPage.vue'
 import AjustesCategoriaPage from 'src/pages/home/ajustes/sections/AjustesCategoriaPage.vue'
+import AjustesPreCargaPage from './sections/AjustesPreCargaPage.vue'
 
 export default {
   components: {
     AjustesTipoProductoPage,
     AjustesMarcaPage,
     AjustesCategoriaPage,
+    AjustesPreCargaPage,
   },
   setup() {
     return {
-      tab: ref('category'),
+      tab: ref('preload'),
       filter: ref(''),
     }
   },
