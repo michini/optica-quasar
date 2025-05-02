@@ -44,6 +44,10 @@ export const useCategoriaStore = defineStore('categoriaStore', {
         const response = await api.put(`categoria/${id}`, data, {
           headers: { Authorization: `Bearer ${localStorage.getItem('token')}` },
         })
+        const index = this.categorias.findIndex((categoria) => categoria.id === id)
+        if (index !== -1) {
+          this.categorias[index] = { ...this.categorias[index], ...data }
+        }
         return response.data
       } catch (error) {
         console.error(`Error updating ajuste with id ${id}:`, error)
@@ -59,6 +63,18 @@ export const useCategoriaStore = defineStore('categoriaStore', {
         return response.data
       } catch (error) {
         console.error(`Error deleting ajuste with id ${id}:`, error)
+        throw error
+      }
+    },
+    async getByProductoId(request) {
+      try {
+        const response = await api.get(`categoria/tipo-producto/getbyid`, {
+          params: request,
+          headers: { Authorization: `Bearer ${localStorage.getItem('token')}` },
+        })
+        return response.data
+      } catch (error) {
+        console.error(`Error fetching producto:`, error)
         throw error
       }
     },
