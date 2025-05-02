@@ -1,7 +1,7 @@
 <template>
   <section id="servicios" class="q-py-lg">
     <div class="text-center q-mb-lg">
-      <h2 class="text-h3">Servicios</h2>
+      <h2 class="text-h3">Servicios y productos</h2>
     </div>
 
     <div class="row justify-center q-px-md">
@@ -17,7 +17,7 @@
                   clickable
                   :active="selectedTab === index"
                   @click="selectedTab = index"
-                  active-class=""
+                  active-class="text-pink-5"
                 >
                   <q-item-section>{{ tab.label }}</q-item-section>
                 </q-item>

@@ -62,6 +62,8 @@
 
   <!-- Sección de Servicios -->
   <ServicesSection />
+  <!-- Sección de Productos -->
+  <ProductoGridSection />
 
   <!-- Sección Nosotros -->
   <AboutSection />
@@ -75,6 +77,7 @@ import { defineComponent } from 'vue'
 import ServicesSection from 'components/singlePage/ServicesSection.vue'
 import AboutSection from 'components/singlePage/AboutSection.vue'
 import ContactSection from 'components/singlePage/ContactSection.vue'
+import ProductoGridSection from 'src/components/singlePage/ProductoGridSection.vue'
 import { ref } from 'vue'
 
 export default defineComponent({
@@ -83,6 +86,7 @@ export default defineComponent({
     ServicesSection,
     AboutSection,
     ContactSection,
+    ProductoGridSection,
   },
   setup() {
     return {
