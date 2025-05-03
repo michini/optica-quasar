@@ -221,7 +221,7 @@
           <q-card-section class="q-pt-none q-gutter-y-md column">
             <q-uploader
               ref="uploader"
-              url="http://127.0.0.1:8000/api/pre-carga/upload"
+              :url="hostname + '/api/pre-carga/upload'"
               accept="image/*"
               :headers="headers"
               @uploaded="onUploaded"
