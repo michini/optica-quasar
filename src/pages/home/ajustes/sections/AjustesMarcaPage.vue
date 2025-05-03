@@ -209,7 +209,7 @@ const addMarca = () => {
 }
 
 const editMarca = (row) => {
-  console.log(row)
+  //console.log(row)
   MarcaStore.update(
     {
       id: row.id,
