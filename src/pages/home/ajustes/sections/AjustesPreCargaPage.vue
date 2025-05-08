@@ -113,6 +113,32 @@
                         round
                       />
                       <!-- <q-btn flat color="primary"> Reserve </q-btn> -->
+                      <q-btn
+                        flat
+                        :disabled="card.barcode"
+                        round
+                        icon="qr_code"
+                        @click="generateBarcode(card)"
+                      >
+                        <!-- <q-badge color="red" rounded floating /> -->
+                      </q-btn>
+                      <q-btn
+                        flat
+                        round
+                        v-if="card.barcode"
+                        icon="add"
+                        color="positive"
+                        @click="((promptAdicional = true), (adicional.pre_carga_id = card.id))"
+                      >
+                        <q-badge color="red" floating transparent rounded>
+                          {{
+                            card.adicionales.length &&
+                            card.id == adicional.pre_carga_id > adicional.total
+                              ? card.adicionales.length
+                              : adicional.total
+                          }}
+                        </q-badge>
+                      </q-btn>
                     </q-card-actions>
                   </q-card>
                 </div>
@@ -256,6 +282,43 @@
       </q-card-actions>
     </q-card>
   </q-dialog>
+  <q-dialog v-model="promptAdicional" persistent>
+    <q-card style="min-width: 350px">
+      <q-card-section>
+        <div class="text-h6">Agregar nueva cantidad</div>
+      </q-card-section>
+
+      <q-card-section class="q-pt-none q-gutter-y-md column">
+        <q-input
+          outlined
+          :dense="dense"
+          v-model="adicional.cantidad"
+          label="Cantidad"
+          autofocus
+          @keyup.enter="promptAdicional = false"
+        />
+        <div>
+          <q-checkbox v-model="adicional.barcode" label="Generar productos" />
+        </div>
+      </q-card-section>
+
+      <q-card-actions align="right" class="text-primary">
+        <q-btn
+          flat
+          label="Cancelar"
+          v-close-popup
+          @click="((adicional.barcode = false), (adicional.cantidad = null))"
+        />
+        <q-btn
+          flat
+          label="Añadir"
+          :disabled="!adicional.barcode"
+          v-close-popup
+          @click="addAdicional()"
+        />
+      </q-card-actions>
+    </q-card>
+  </q-dialog>
 </template>
 
 <script>
@@ -264,10 +327,12 @@ import { usePreCargaStore } from 'src/stores/usePreCargaStore'
 import { useTipoProductoStore } from 'src/stores/useTipoProductoStore'
 import { useCategoriaStore } from 'src/stores/useCategoriaStore'
 import { useMarcaStore } from 'src/stores/useMarcaStore'
+import { useAdicionalStore } from 'src/stores/useAdicionalStore'
 import { Notify, Dialog } from 'quasar'
 
 const hostname = ref('http://localhost:8000')
 const prompt = ref(false)
+const promptAdicional = ref(false)
 const PreCargaStore = usePreCargaStore()
 const getAllPrecarga = PreCargaStore.getAll()
 const cards = ref([])
@@ -286,6 +351,7 @@ const preCarga = ref({
   tipoProductoId: '',
   marcaId: '',
   categoriaId: '',
+  adicionales: [],
 })
 const titulo = ref('')
 const optionsTipoProducto = ref([])
@@ -295,6 +361,13 @@ const optionsCategoria = ref([])
 const tipoProductosStore = useTipoProductoStore()
 const categoriasStore = useCategoriaStore()
 const marcasStore = useMarcaStore()
+const adicionalStore = useAdicionalStore()
+const adicional = ref({
+  cantidad: '',
+  pre_carga_id: '',
+  barcode: false,
+  total: 0,
+})
 
 const cleanForm = () => {
   preCarga.value = {
@@ -312,6 +385,7 @@ const cleanForm = () => {
     tipoProductoId: '',
     marcaId: '',
     categoriaId: '',
+    adicionales: [],
   }
 }
 
@@ -500,6 +574,35 @@ const deletePreCarga = (row) => {
   })
 }
 
+const addAdicional = () => {
+  adicionalStore
+    .create({ cantidad: adicional.value.cantidad, pre_carga_id: adicional.value.pre_carga_id })
+    .then(function (res) {
+      adicional.value.cantidad = ''
+      adicional.value.pre_carga_id = ''
+      adicional.value.total = res.adicional_total
+      adicional.value.barcode = false
+      Notify.create({
+        message: res.message,
+        icon: 'check_circle',
+        type: 'positive',
+        color: 'green',
+        position: 'top',
+        timeout: 2000,
+      })
+    })
+    .catch(function (err) {
+      Notify.create({
+        message: err.message,
+        icon: 'error',
+        type: 'negative',
+        color: 'red',
+        position: 'top',
+        timeout: 2000,
+      })
+    })
+}
+
 export default {
   setup() {
     return {
@@ -527,6 +630,9 @@ export default {
         },
       ],
       hostname,
+      addAdicional,
+      promptAdicional,
+      adicional,
     }
   },
 }
