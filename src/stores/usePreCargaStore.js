@@ -25,6 +25,7 @@ export const usePreCargaStore = defineStore('preCargaStore', {
           barcode: preCarga.barcode,
           tipo_producto: preCarga.tipo_producto,
           marca: preCarga.marca,
+          genero: preCarga.genero,
           categoria: preCarga.categoria,
           created_at: preCarga.created_at,
           updated_at: preCarga.updated_at,

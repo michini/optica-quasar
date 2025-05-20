@@ -17,8 +17,19 @@
                   <q-card class="text-left" flat bordered>
                     <q-card-section>
                       <q-card-section class="q-pt-xs q-pb-xs col-5">
-                        <!-- <div class="text-overline">Id: {{ card.id }}</div> -->
-                        <div class="text-h5 q-mt-sm q-mb-xs">{{ card.tipo_producto.nombre }}</div>
+                        <div class="text-h5 q-mt-sm q-mb-xs">
+                          {{ card.tipo_producto.nombre }}
+                          <q-badge
+                            :color="
+                              card.genero === 'Hombre'
+                                ? 'primary'
+                                : card.genero === 'Mujer'
+                                  ? 'pink'
+                                  : 'green'
+                            "
+                            >{{ card.genero }}</q-badge
+                          >
+                        </div>
                         <div class="text-caption">
                           <div class="row q-ml-xs">
                             <div class="col-6">
@@ -99,6 +110,7 @@
                           (preCarga.material = card.material),
                           (preCarga.descripcion = card.descripcion),
                           (preCarga.imagen = card.imagen),
+                          (preCarga.genero = card.genero),
                           (preCarga.id = card.id),
                           (preCarga.tipoProductoId = card.tipo_producto.id),
                           (preCarga.marcaId = card.marca.id),
@@ -118,7 +130,7 @@
                         :disabled="card.barcode"
                         round
                         icon="qr_code"
-                        @click="generateBarcode(card)"
+                        @click="addProducts(card.id)"
                       >
                         <!-- <q-badge color="red" rounded floating /> -->
                       </q-btn>
@@ -131,12 +143,7 @@
                         @click="((promptAdicional = true), (adicional.pre_carga_id = card.id))"
                       >
                         <q-badge color="red" floating transparent rounded>
-                          {{
-                            card.adicionales.length &&
-                            card.id == adicional.pre_carga_id > adicional.total
-                              ? card.adicionales.length
-                              : adicional.total
-                          }}
+                          {{ card.adicionales.length }}
                         </q-badge>
                       </q-btn>
                     </q-card-actions>
@@ -232,7 +239,7 @@
         </div>
       </div>
       <div class="row">
-        <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+        <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12">
           <q-card-section class="q-pt-none q-gutter-y-md column">
             <q-input
               filled
@@ -243,7 +250,7 @@
             />
           </q-card-section>
         </div>
-        <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+        <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12">
           <q-card-section class="q-pt-none q-gutter-y-md column">
             <q-uploader
               ref="uploader"
@@ -253,6 +260,7 @@
               @uploaded="onUploaded"
               field-name="imagen"
               auto-upload
+              style="max-width: 100%"
             >
               <template v-slot:list v-if="titulo == 'Actualizar ' + section">
                 <q-list separator>
@@ -260,6 +268,18 @@
                 </q-list>
               </template>
             </q-uploader>
+          </q-card-section>
+        </div>
+        <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12">
+          <q-card-section class="q-pt-none q-gutter-y-md column">
+            <q-select
+              filled
+              outlined
+              v-model="preCarga.genero"
+              :options="['Hombre', 'Mujer', 'Niños']"
+              label="Genero"
+            >
+            </q-select>
           </q-card-section>
         </div>
       </div>
@@ -294,6 +314,7 @@
           :dense="dense"
           v-model="adicional.cantidad"
           label="Cantidad"
+          type="number"
           autofocus
           @keyup.enter="promptAdicional = false"
         />
@@ -328,6 +349,7 @@ import { useTipoProductoStore } from 'src/stores/useTipoProductoStore'
 import { useCategoriaStore } from 'src/stores/useCategoriaStore'
 import { useMarcaStore } from 'src/stores/useMarcaStore'
 import { useAdicionalStore } from 'src/stores/useAdicionalStore'
+import { useProductoStore } from 'src/stores/useProductoStore'
 import { Notify, Dialog } from 'quasar'
 
 const hostname = ref('http://localhost:8000')
@@ -335,7 +357,7 @@ const prompt = ref(false)
 const promptAdicional = ref(false)
 const PreCargaStore = usePreCargaStore()
 const getAllPrecarga = PreCargaStore.getAll()
-const cards = ref([])
+const cards = ref({})
 const preCarga = ref({
   id: '',
   cantidad: '',
@@ -351,6 +373,7 @@ const preCarga = ref({
   tipoProductoId: '',
   marcaId: '',
   categoriaId: '',
+  genero: '',
   adicionales: [],
 })
 const titulo = ref('')
@@ -362,6 +385,7 @@ const tipoProductosStore = useTipoProductoStore()
 const categoriasStore = useCategoriaStore()
 const marcasStore = useMarcaStore()
 const adicionalStore = useAdicionalStore()
+const productoStore = useProductoStore()
 const adicional = ref({
   cantidad: '',
   pre_carga_id: '',
@@ -386,6 +410,7 @@ const cleanForm = () => {
     marcaId: '',
     categoriaId: '',
     adicionales: [],
+    genero: '',
   }
 }
 
@@ -454,6 +479,7 @@ const addPrecarga = () => {
     categoria_id: preCarga.value.categoria.value,
     barcode: preCarga.value.barcode,
     imagen: preCarga.value.imagen,
+    genero: preCarga.value.genero,
   })
     .then(function (res) {
       cards.value.unshift(res.preCarga)
@@ -486,7 +512,6 @@ const onUploaded = (info) => {
 }
 
 const editPreCarga = (row) => {
-  console.log(row)
   PreCargaStore.update(
     {
       id: row.id,
@@ -496,6 +521,7 @@ const editPreCarga = (row) => {
       precio: row.precio,
       descripcion: row.descripcion,
       //barcode: '',
+      genero: row.genero,
       imagen: row.imagen,
       tipo_producto_id: row.tipo_producto.value ? row.tipo_producto.value : row.tipoProductoId,
       marca_id: row.marca.value ? row.marca.value : row.marcaId,
@@ -514,6 +540,7 @@ const editPreCarga = (row) => {
           item.imagen = res.preCarga.imagen
           item.categoria = res.categoria
           item.marca = res.marca
+          item.genero = res.preCarga.genero
           item.tipo_producto = res.tipo_producto
           item.updated_at = res.preCarga.updated_at
         }
@@ -578,10 +605,6 @@ const addAdicional = () => {
   adicionalStore
     .create({ cantidad: adicional.value.cantidad, pre_carga_id: adicional.value.pre_carga_id })
     .then(function (res) {
-      adicional.value.cantidad = ''
-      adicional.value.pre_carga_id = ''
-      adicional.value.total = res.adicional_total
-      adicional.value.barcode = false
       Notify.create({
         message: res.message,
         icon: 'check_circle',
@@ -590,8 +613,80 @@ const addAdicional = () => {
         position: 'top',
         timeout: 2000,
       })
+      productoStore
+        .insertByPreCarga({
+          preCargaId: adicional.value.pre_carga_id,
+          adicionalId: res.adicional.id,
+        })
+        .then(function (res2) {
+          Notify.create({
+            message: res2.message,
+            icon: 'check_circle',
+            type: 'positive',
+            color: 'green',
+            position: 'top',
+            timeout: 2000,
+          })
+        })
+        .catch(function (err2) {
+          Notify.create({
+            message: err2.message,
+            icon: 'error',
+            type: 'negative',
+            color: 'red',
+            position: 'top',
+            timeout: 2000,
+          })
+        })
+      adicional.value.cantidad = ''
+      adicional.value.pre_carga_id = ''
+      adicional.value.total = res.adicional_total
+      adicional.value.barcode = false
+      preCarga.value.adicionales.push(res.adicional)
+
+      // Buscar la precarga correspondiente y agregar el adicional
+      const card = cards.value.find((item) => item.id === res.adicional.pre_carga_id)
+      if (card) {
+        card.adicionales.push(res.adicional)
+      }
     })
     .catch(function (err) {
+      Notify.create({
+        message: err.message,
+        icon: 'error',
+        type: 'negative',
+        color: 'red',
+        position: 'top',
+        timeout: 2000,
+      })
+    })
+}
+
+const addProducts = (preCargaId) => {
+  productoStore
+    .insertByPreCarga({
+      preCargaId: preCargaId,
+      adicionalId: null,
+    })
+    .then(function (res) {
+      Notify.create({
+        message: res.message,
+        icon: 'check_circle',
+        type: 'positive',
+        color: 'green',
+        position: 'top',
+        timeout: 2000,
+      })
+
+      cards.value = cards.value.map((item) => {
+        if (item.id === preCargaId) {
+          item.barcode = res.preCarga.barcode
+        }
+        return item
+      })
+    })
+    .catch(function (err) {
+      console.log(err)
       Notify.create({
         message: err.message,
         icon: 'error',
@@ -633,6 +728,7 @@ export default {
       addAdicional,
       promptAdicional,
       adicional,
+      addProducts,
     }
   },
 }
