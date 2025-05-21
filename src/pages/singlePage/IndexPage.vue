@@ -41,7 +41,7 @@
             push
             round
             dense
-            color="orange"
+            color="red-7"
             text-color="black"
             icon="arrow_left"
             @click="$refs.carousel.previous()"
@@ -50,7 +50,7 @@
             push
             round
             dense
-            color="orange"
+            color="red-7"
             text-color="black"
             icon="arrow_right"
             @click="$refs.carousel.next()"
@@ -60,9 +60,14 @@
     </q-carousel>
   </div>
 
+  <VentasSection/>
+
   <!-- Sección de Servicios -->
   <ServicesSection />
+  <CarrouselProductos />
   <!-- Sección de Productos -->
+  
+  <CategoriSection />
   <ProductoGridSection />
 
   <!-- Sección Nosotros -->
@@ -78,6 +83,9 @@ import ServicesSection from 'components/singlePage/ServicesSection.vue'
 import AboutSection from 'components/singlePage/AboutSection.vue'
 import ContactSection from 'components/singlePage/ContactSection.vue'
 import ProductoGridSection from 'src/components/singlePage/ProductoGridSection.vue'
+import VentasSection from 'src/components/singlePage/VentasSection.vue'
+import CategoriSection from 'src/components/singlePage/CategoriaSection.vue'
+import CarrouselProductos from 'src/components/singlePage/CarrouselProductos.vue'
 import { ref } from 'vue'
 
 export default defineComponent({
@@ -87,6 +95,9 @@ export default defineComponent({
     AboutSection,
     ContactSection,
     ProductoGridSection,
+    VentasSection,
+    CategoriSection,
+    CarrouselProductos
   },
   setup() {
     return {
@@ -102,6 +113,6 @@ export default defineComponent({
   text-align: center;
   padding: 12px;
   color: white;
-  background-color: rgba(0, 0, 0, 0.3);
+  background-color: rgba(0, 0, 0, 0.7);
 }
 </style>

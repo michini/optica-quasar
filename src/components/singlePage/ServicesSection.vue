@@ -1,5 +1,6 @@
 <template>
   <section id="servicios" class="q-py-lg">
+    <div></div>
     <div class="text-center q-mb-lg">
       <h2 class="text-h3">Servicios y productos</h2>
     </div>
@@ -17,7 +18,7 @@
                   clickable
                   :active="selectedTab === index"
                   @click="selectedTab = index"
-                  active-class="text-pink-5"
+                  active-class="text-red-7"
                 >
                   <q-item-section>{{ tab.label }}</q-item-section>
                 </q-item>
@@ -68,7 +69,7 @@ export default defineComponent({
         label: 'Medida de vista',
         videoLink: 'https://www.youtube.com/embed/BpVqEO1z3ao?si=TqPAS-1gZ9lOYRrR&amp;controls=0',
         content:
-          'La medida de vista es un procedimiento esencial para evaluar la salud visual y determinar la graduación adecuada de los lentes o gafas. Este servicio incluye una serie de pruebas realizadas por un profesional de la salud visual, como optometristas u oftalmólogos, para identificar problemas de refracción, como miopía, hipermetropía, astigmatismo o presbicia. Además, la medida de vista permite detectar posibles enfermedades o condiciones oculares, como glaucoma, cataratas o degeneración macular, asegurando un diagnóstico temprano y un tratamiento oportuno. Este proceso es fundamental para garantizar una visión clara.',
+          'La medida de vista es un procedimiento esencial para evaluar la salud visual y determinar la graduación adecuada de los lentes o gafas. Este servicio incluye una serie de pruebas realizadas por un profesional de la salud visual, como optometristas u oftalmólogos, para identificar problemas de refracción, como miopía, hipermetropía, astigmatismo o presbicia. Además, la medida de vista permite detectar posibles enfermedades o condiciones oculares, como glaucoma, cataratas o degeneración macular, asegurando un diagnóstico temprano y un tratamiento oportuno.',
       },
       {
         label: 'Monturas',
