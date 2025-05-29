@@ -170,7 +170,7 @@
         <q-td :props="props">
           <q-avatar size="50px" square>
             <q-img
-              :src="'http://localhost:8000' + props.row.imagen"
+              :src="'http://129.213.136.111:8000' + props.row.imagen"
               :alt="props.row.descripcion"
               fit="cover"
             />
