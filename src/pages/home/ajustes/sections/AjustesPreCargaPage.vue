@@ -354,7 +354,7 @@ import { useAdicionalStore } from 'src/stores/useAdicionalStore'
 import { useProductoStore } from 'src/stores/useProductoStore'
 import { Notify, Dialog } from 'quasar'
 
-const hostname = ref('http://localhost:8000')
+const hostname = ref('http://129.213.136.111:8000')
 const prompt = ref(false)
 const promptAdicional = ref(false)
 const PreCargaStore = usePreCargaStore()
