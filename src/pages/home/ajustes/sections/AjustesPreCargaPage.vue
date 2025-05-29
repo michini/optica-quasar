@@ -20,6 +20,7 @@
                         <div class="text-h5 q-mt-sm q-mb-xs">
                           {{ card.tipo_producto.nombre }}
                           <q-badge
+                            v-if="card.genero"
                             :color="
                               card.genero === 'Hombre'
                                 ? 'primary'
@@ -127,9 +128,10 @@
                       <!-- <q-btn flat color="primary"> Reserve </q-btn> -->
                       <q-btn
                         flat
-                        :disabled="card.barcode"
+                        v-if="!card.barcode"
                         round
-                        icon="qr_code"
+                        icon="add"
+                        color="positive"
                         @click="addProducts(card.id)"
                       >
                         <!-- <q-badge color="red" rounded floating /> -->

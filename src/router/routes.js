@@ -40,12 +40,14 @@ const routes = [
     path: '/inventario',
     name: 'inventario',
     component: () => import('src/layouts/home/HomeLayout.vue'),
-    // children: [
-    //   {
-    //     path: '',
-    //     component: () => import('src/pages/home/inventario/IndexPage.vue'),
-    //   },
-    // ],
+    children: [
+      {
+        path: '',
+        name: 'inventario.index',
+        meta: { title: 'Inventario Page' },
+        component: () => import('src/pages/home/inventario/IndexPage.vue'),
+      },
+    ],
     meta: { requiresAuth: true },
   },
   {
