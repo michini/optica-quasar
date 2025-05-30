@@ -68,6 +68,15 @@ const routes = [
     ],
     meta: { requiresAuth: true },
   },
+  // {
+  //   path: '/checkout',
+  //   component: () => import('pages/singlePage/CheckoutPage.vue'),
+  // },
+  {
+    path: '/checkout',
+    component: () => import('layouts/MainLayout.vue'),
+    children: [{ path: '', component: () => import('pages/singlePage/CheckoutPage.vue') }],
+  },
 
   // Always leave this as last one,
   // but you can also remove it

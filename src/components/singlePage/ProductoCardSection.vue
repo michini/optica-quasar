@@ -15,17 +15,18 @@
         <div class="product-title">{{ product.name }}</div>
 
         <!-- Selector de colores -->
-        <!-- <div class="color-options q-mt-xs">
+        <div class="color-options q-mt-xs" v-if="product.colors && product.colors.length > 0">
           <q-btn
             v-for="(color, index) in product.colors"
             :key="index"
             round
             unelevated
             size="sm"
-            :style="`background-color: ${color}; border: 1px solid #ddd;`"
+            :style="`background-color: ${color}; border: 2px solid ${selectedColor === color ? '#1976d2' : '#ddd'};`"
             class="color-option q-mr-xs"
+            @click="selectColor(color)"
           />
-        </div> -->
+        </div>
 
         <!-- Precios -->
         <div class="pricing q-mt-sm">
@@ -42,16 +43,37 @@
         </div>
       </q-card-section>
 
-      <!-- Botón de compra -->
+      <!-- Botones de compra -->
       <q-card-actions class="q-px-md q-pb-md">
-        <!-- <q-btn unelevated color="pink-10" class="full-width buy-button" label="Comprar" /> -->
+        <div class="row q-gutter-xs full-width">
+          <q-btn
+            unelevated
+            color="pink-10"
+            class="col buy-button"
+            label="Comprar"
+            @click="buyNow"
+          />
+          <q-btn
+            flat
+            round
+            color="grey-7"
+            icon="shopping_cart"
+            class="add-to-cart-btn"
+            @click="addToCart"
+            :loading="addingToCart"
+          >
+            <q-tooltip>Agregar al carrito</q-tooltip>
+          </q-btn>
+        </div>
       </q-card-actions>
     </q-card>
   </div>
 </template>
 
 <script>
-import { defineComponent } from 'vue'
+import { defineComponent, ref, onMounted } from 'vue'
+import { useQuasar } from 'quasar'
+import { useCartStore } from 'src/stores/useCartStore'
 
 export default defineComponent({
   name: 'ProductCard',
@@ -71,10 +93,83 @@ export default defineComponent({
       }),
     },
   },
-  methods: {
-    formatPrice(price) {
+  setup(props) {
+    const cartStore = useCartStore()
+    const $q = useQuasar()
+    const addingToCart = ref(false)
+    const selectedColor = ref(null)
+
+    // Seleccionar el primer color por defecto si existe
+    onMounted(() => {
+      if (props.product.colors && props.product.colors.length > 0) {
+        selectedColor.value = props.product.colors[0]
+      }
+    })
+
+    const formatPrice = (price) => {
+      if (!price) return '0.00'
       return price.toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,')
-    },
+    }
+
+    const addToCart = async () => {
+      if (!props.product.available) {
+        $q.notify({
+          type: 'negative',
+          message: 'Producto no disponible',
+          position: 'top',
+        })
+        return
+      }
+
+      addingToCart.value = true
+
+      try {
+        await new Promise((resolve) => setTimeout(resolve, 500)) // Simular carga
+
+        cartStore.addToCart(props.product, selectedColor.value)
+
+        $q.notify({
+          type: 'positive',
+          message: `${props.product.name} agregado al carrito`,
+          actions: [
+            {
+              label: 'Ver carrito',
+              color: 'white',
+              handler: () => cartStore.openCart(),
+            },
+          ],
+          position: 'top',
+        })
+      } catch (error) {
+        $q.notify({
+          type: 'negative',
+          message: 'Error al agregar producto' + error,
+          position: 'top',
+        })
+      } finally {
+        addingToCart.value = false
+      }
+    }
+
+    const buyNow = () => {
+      addToCart()
+      setTimeout(() => {
+        cartStore.openCart()
+      }, 600)
+    }
+
+    const selectColor = (color) => {
+      selectedColor.value = color
+    }
+
+    return {
+      formatPrice,
+      addToCart,
+      buyNow,
+      selectColor,
+      selectedColor,
+      addingToCart,
+    }
   },
 })
 </script>
@@ -172,5 +267,14 @@ export default defineComponent({
   transition: background-color 0.3s ease;
   font-weight: 500;
   letter-spacing: 0.5px;
+}
+
+.add-to-cart-btn {
+  transition: all 0.3s ease;
+
+  &:hover {
+    background-color: rgba(0, 0, 0, 0.1);
+    transform: scale(1.1);
+  }
 }
 </style>

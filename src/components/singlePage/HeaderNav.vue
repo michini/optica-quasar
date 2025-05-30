@@ -19,7 +19,7 @@
           <q-btn flat no-caps label="Inicio" to="/" />
           <q-btn flat no-caps label="Servicios" href="#servicios" />
           <q-btn flat no-caps label="Nosotros" href="#nosotros" />
-          <q-btn flat no-caps label="Contacto" href="#contacto" ></q-btn>
+          <q-btn flat no-caps label="Contacto" href="#contacto"></q-btn>
           <q-btn
             flat
             no-caps
@@ -33,6 +33,9 @@
         </q-btn-group>
       </q-toolbar-title>
     </div>
+
+    <!-- Icono del carrito -->
+    <CartIcon />
 
     <!-- Menú móvil -->
     <q-btn flat dense round icon="menu" class="lt-md" aria-label="Menu">
@@ -62,14 +65,17 @@
 <script>
 import { defineComponent } from 'vue'
 import { useAuthStore } from 'src/stores/useAuthStore'
+import CartIcon from './CartIcon.vue'
 
 export default defineComponent({
   name: 'HeaderNav',
+  components: { CartIcon },
   setup() {
     const authStore = useAuthStore()
 
     return {
       authStore,
+      CartIcon,
     }
   },
 })
