@@ -169,11 +169,7 @@
       <template v-slot:body-cell-imagen="props">
         <q-td :props="props">
           <q-avatar size="50px" square>
-            <q-img
-              :src="'http://129.213.136.111:8000' + props.row.imagen"
-              :alt="props.row.descripcion"
-              fit="cover"
-            />
+            <q-img :src="API_URL + props.row.imagen" :alt="props.row.descripcion" fit="cover" />
           </q-avatar>
         </q-td>
       </template>
@@ -242,12 +238,21 @@
       </template>
     </q-table>
   </q-page>
+  <!-- Modal de Detalles del Producto -->
+  <div class="row">
+    <div class="col-md-4 col-sm-12 col-xs-12 q-pa-md">
+      <ProductDetailModal v-model="showProductModal" :product="selectedProductForModal" />
+    </div>
+  </div>
 </template>
 
 <script>
 import { ref, computed } from 'vue'
 import { useQuasar } from 'quasar'
 import { useProductoStore } from 'src/stores/useProductoStore'
+import ProductDetailModal from 'src/components/home/inventario/ProductDetailModal.vue'
+
+const API_URL = process.env.API_URL
 
 //stores
 const productosStore = useProductoStore()
@@ -538,6 +543,9 @@ const productoByCodigo = ref([])
 
 export default {
   name: 'ProductListComponent',
+  components: {
+    ProductDetailModal,
+  },
 
   setup() {
     const $q = useQuasar()
@@ -550,11 +558,17 @@ export default {
       })
     }
 
+    // Estados para el modal de detalles
+    const showProductModal = ref(false)
+    const selectedProductForModal = ref(null)
+
     const viewProduct = (product) => {
-      productosStore.getProductoByCodigo(product.codigo).then(function (res) {
-        productoByCodigo.value = res
-        console.log(productoByCodigo.value)
-      })
+      // productosStore.getProductoByCodigo(product.codigo).then(function (res) {
+      //   productoByCodigo.value = res
+      //   console.log(productoByCodigo.value)
+      // })
+      selectedProductForModal.value = product
+      showProductModal.value = true
       // $q.notify({
       //   type: 'info',
       //   message: `Viendo detalles de: ${product.descripcion}`,
@@ -623,6 +637,10 @@ export default {
 
       //dialog
       productoByCodigo,
+      API_URL,
+      // Estados del modal
+      showProductModal,
+      selectedProductForModal,
     }
   },
 }
