@@ -79,7 +79,7 @@
             <q-range
               v-model="filters.precioRange"
               :min="0"
-              :max="500"
+              :max="2000"
               :step="5"
               label
               color="primary"
@@ -268,7 +268,7 @@ const filters = ref({
   categoria: null,
   marca: null,
   estados: ['Disponible'],
-  precioRange: { min: 0, max: 500 },
+  precioRange: { min: 0, max: 2000 },
   genero: null,
   material: null,
   color: null,
@@ -479,7 +479,7 @@ const clearFilters = () => {
     categoria: null,
     marca: null,
     estados: ['Disponible'],
-    precioRange: { min: 0, max: 500 },
+    precioRange: { min: 0, max: 2000 },
     genero: null,
     material: null,
     color: null,
