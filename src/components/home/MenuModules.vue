@@ -34,6 +34,11 @@ export default defineComponent({
         route: '/dashboard',
       },
       {
+        icon: 'people',
+        label: 'Clientes',
+        route: '/clientes',
+      },
+      {
         icon: 'inventory',
         label: 'Inventario',
         route: '/inventario',
@@ -46,7 +51,7 @@ export default defineComponent({
       {
         icon: 'visibility',
         label: 'Oftalmologos',
-        route: '/profile',
+        route: '/oftalmologos',
       },
       {
         icon: 'event',

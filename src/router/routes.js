@@ -61,12 +61,34 @@ const routes = [
         meta: { title: 'Ajustes Page' },
         component: () => import('src/pages/home/ajustes/IndexPage.vue'),
       },
-      // {
-      //   path: '/ajustes/tipo-producto',
-      //   name: 'ajustes.tipo-producto',
-      //   meta: { title: 'Tipo producto' },
-      //   component: () => import('src/pages/home/ajustes/sections/AjustesTipoProductoPage.vue'),
-      // },
+    ],
+    meta: { requiresAuth: true },
+  },
+  {
+    path: '/oftalmologos',
+    name: 'oftalmologos',
+    component: () => import('src/layouts/home/HomeLayout.vue'),
+    children: [
+      {
+        path: '',
+        name: 'oftalmologos.index',
+        meta: { title: 'Oftalmologos Page' },
+        component: () => import('src/pages/home/oftalmologos/IndexPage.vue'),
+      },
+    ],
+    meta: { requiresAuth: true },
+  },
+  {
+    path: '/clientes',
+    name: 'clientes',
+    component: () => import('src/layouts/home/HomeLayout.vue'),
+    children: [
+      {
+        path: '',
+        name: 'clientes.index',
+        meta: { title: 'Clientes Page' },
+        component: () => import('src/pages/home/clientes/IndexPage.vue'),
+      },
     ],
     meta: { requiresAuth: true },
   },
