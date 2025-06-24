@@ -46,7 +46,7 @@ export default defineComponent({
       {
         icon: 'list_alt',
         label: 'Pedidos',
-        route: '/profile',
+        route: '/pedidos',
       },
       {
         icon: 'visibility',

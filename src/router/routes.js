@@ -92,6 +92,20 @@ const routes = [
     ],
     meta: { requiresAuth: true },
   },
+  {
+    path: '/pedidos',
+    name: 'pedidos',
+    component: () => import('src/layouts/home/HomeLayout.vue'),
+    children: [
+      {
+        path: '',
+        name: 'pedidos.index',
+        meta: { title: 'Pedidos Page' },
+        component: () => import('src/pages/home/pedidos/IndexPage.vue'),
+      },
+    ],
+    meta: { requiresAuth: true },
+  },
 
   // Always leave this as last one,
   // but you can also remove it
